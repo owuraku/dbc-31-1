@@ -27,4 +27,20 @@ class ServiceRequest extends FormRequest
             "amount" => ['required', 'numeric', 'min:1', 'max:10000']
         ];
     }
+
+    public function messages()
+    {
+        return [
+            "name.min" => "Your name is too short.",
+            "name.max" => "Your name is too long"
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            "name" => "wodin",
+            "description" => "nky3ky3m"
+        ];
+    }
 }
