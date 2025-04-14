@@ -13,7 +13,10 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('services.index');
+        $services = Service::all();
+        return view('services.index', [
+            'services' => $services
+        ]);
     }
 
     /**
@@ -30,6 +33,12 @@ class ServiceController extends Controller
     public function store(ServiceRequest $request)
     {
         $data = $request->validated();
+        // $request->validate([
+        //     'name' => 'required',
+        //     'description' => 'required',
+        //     'amount' => 'required'
+        // ])
+
         Service::create($data);
     }
 
@@ -46,14 +55,20 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        // $service = Service::find($service_id); // without type hinting
+        // dd($service);
+        return view('services.edit', [
+            'service' => $service
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Service $service)
+    public function update(ServiceRequest $request, Service $service)
     {
+        $data = $request->validated();
+        $service->update($data);
         //
     }
 

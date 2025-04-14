@@ -28,19 +28,19 @@ class ServiceRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            "name.min" => "Your name is too short.",
-            "name.max" => "Your name is too long"
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         "name.min" => "Your name is too short.",
+    //         "name.max" => "Your name is too long"
+    //     ];
+    // }
 
-    public function attributes()
-    {
-        return [
-            "name" => "wodin",
-            "description" => "nky3ky3m"
-        ];
-    }
+    // public function attributes()
+    // {
+    //     return [
+    //         "name" => "wodin",
+    //         "description" => "nky3ky3m"
+    //     ];
+    // }
 }
