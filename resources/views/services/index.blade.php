@@ -16,10 +16,12 @@
     </style>
     <div class="container">
         <div class="row">
+            <a href="{{ route('services.create') }}" class="btn btn-sm btn-outline-primary btn-lg">Add New Service</a>
             @foreach ($services as $service)
                 <div class="col-md-4">
                     <div class="card">
-                        <button class="btn btn-sm btn-outline-secondary edit-button">Edit</button>
+                        <a href="{{ route('services.edit', $service->id) }}"
+                            class="btn btn-sm btn-outline-secondary edit-button">Edit</a>
                         <img src="https://via.placeholder.com/300x200/FFC107/000000?Text=Product+1" class="card-img-top"
                             alt="Product 1">
                         <div class="card-body">

@@ -24,7 +24,8 @@ class ServiceRequest extends FormRequest
         return [
             "name" => ['required', 'min:5', 'max:255'],
             "description" => ['required', 'min:10', 'max:255'],
-            "amount" => ['required', 'numeric', 'min:1', 'max:10000']
+            "amount" => ['required', 'numeric', 'min:1', 'max:10000'],
+            "image" => ['sometimes', 'image', 'max:500']
         ];
     }
 

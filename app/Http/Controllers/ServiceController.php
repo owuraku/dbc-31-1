@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -33,13 +34,15 @@ class ServiceController extends Controller
     public function store(ServiceRequest $request)
     {
         $data = $request->validated();
+        $imagePath = $request->file('image')->store();
+        $data['image'] = $imagePath;
         // $request->validate([
         //     'name' => 'required',
         //     'description' => 'required',
         //     'amount' => 'required'
         // ])
-
         Service::create($data);
+        return redirect(route('services.index'));
     }
 
     /**
@@ -68,7 +71,15 @@ class ServiceController extends Controller
     public function update(ServiceRequest $request, Service $service)
     {
         $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store();
+            $data['image'] = $imagePath;
+            Storage::delete($service->image); // delete old image
+        }
+
         $service->update($data);
+        return redirect(route('services.index'));
         //
     }
 
