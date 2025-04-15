@@ -75,7 +75,9 @@ class ServiceController extends Controller
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store();
             $data['image'] = $imagePath;
-            Storage::delete($service->image); // delete old image
+            if ($service->image) {
+                Storage::delete($service->image); // delete old image
+            }
         }
 
         $service->update($data);

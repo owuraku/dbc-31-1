@@ -22,8 +22,7 @@
                     <div class="card">
                         <a href="{{ route('services.edit', $service->id) }}"
                             class="btn btn-sm btn-outline-secondary edit-button">Edit</a>
-                        <img src="https://via.placeholder.com/300x200/FFC107/000000?Text=Product+1" class="card-img-top"
-                            alt="Product 1">
+                        <img src="{{ $service->imageUrl() }}" class="card-img-top" alt="Product 1">
                         <div class="card-body">
                             <h5 class="card-title">{{ $service->name }}</h5>
                             <p class="card-text">{{ $service->description }}</p>
