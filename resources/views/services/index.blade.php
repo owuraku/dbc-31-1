@@ -15,6 +15,7 @@
         }
     </style>
     <div class="container">
+        {{-- @dump(auth()->user()) --}}
         <div class="row">
             <a href="{{ route('services.create') }}" class="btn btn-sm btn-outline-primary btn-lg">Add New Service</a>
             @foreach ($services as $service)
