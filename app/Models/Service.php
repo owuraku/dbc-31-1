@@ -11,7 +11,8 @@ class Service extends Model
         'name',
         'description',
         'amount',
-        'image'
+        'image',
+        'user_id',
     ];
 
     public function imageUrl(): string

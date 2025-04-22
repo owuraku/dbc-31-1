@@ -14,7 +14,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        // $services = Service::where('user_id', auth()->user()->id)->get();
+        $services =  auth()->user()->services()->get();
+
         return view('services.index', [
             'services' => $services
         ]);
@@ -36,13 +38,17 @@ class ServiceController extends Controller
         $data = $request->validated();
         $imagePath = $request->file('image')->store();
         $data['image'] = $imagePath;
+        $data['user_id'] = auth()->user()->id;
         // $request->validate([
         //     'name' => 'required',
         //     'description' => 'required',
         //     'amount' => 'required'
         // ])
         Service::create($data);
-        return redirect(route('services.index'));
+        return redirect(route('services.index'))->with([
+            'key' => 'success',
+            'message' => 'Service created successfully'
+        ]);
     }
 
     /**
@@ -58,6 +64,10 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
+        // if ($service->user_id != auth()->user()->id) {
+        //     return redirect(route('services.index'));
+        // }
+        // $service_id =)
         // $service = Service::find($service_id); // without type hinting
         // dd($service);
         return view('services.edit', [
@@ -70,6 +80,10 @@ class ServiceController extends Controller
      */
     public function update(ServiceRequest $request, Service $service)
     {
+        // if ($service->user_id != auth()->user()->id) {
+        //     return redirect(route('services.index'));
+        // }
+
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
@@ -81,7 +95,10 @@ class ServiceController extends Controller
         }
 
         $service->update($data);
-        return redirect(route('services.index'));
+        return redirect(route('services.index'))->with([
+            'key' => 'success',
+            'message' => 'Service updated successfully'
+        ]);
         //
     }
 

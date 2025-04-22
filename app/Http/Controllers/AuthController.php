@@ -64,4 +64,13 @@ class AuthController extends Controller
         User::create($data);
         return redirect(route('auth.login.page'));
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        // request()->session()->invalidate();
+        // request()->session()->regenerate();
+
+        return redirect(route('auth.login.page'));
+    }
 }
