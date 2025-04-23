@@ -5,7 +5,13 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomepageController::class, 'index']);
+Route::get('/', [HomepageController::class, 'index'])->name('homepage');
+// Route::get('/mail', function () {
+//     $user = App\Models\User::find(2);
+//     $mail = new App\Mail\Welcome($user);
+//     return $mail;
+// });  -> previewing your email
+
 
 Route::resource('services', ServiceController::class, [
     'except' => ['edit', 'update', 'destroy']

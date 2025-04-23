@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Welcome;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
@@ -61,7 +63,10 @@ class AuthController extends Controller
         $data['image'] = $imagePath;
         $data['user_type'] = 'user';
 
-        User::create($data);
+        $user = User::create($data);
+        Mail::to(
+            $user->email
+        )->send(new Welcome($user));
         return redirect(route('auth.login.page'));
     }
 
